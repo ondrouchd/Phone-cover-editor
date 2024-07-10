@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 interface PhoneTemplateProps {
     onValueChange: (value: string) => void;
@@ -8,6 +8,7 @@ const phoneTemplates: { [key: string]: string } = {
   iPhone: "/images/iphone-8.png",
   Samsung: "/images/samsung-template.png",
   Huawei: "/images/huawei-template.png",
+  Motorola: "/images/moto_g72.png",
 };
 
 const PhoneTemplate: React.FC<PhoneTemplateProps> = ({onValueChange}) => {

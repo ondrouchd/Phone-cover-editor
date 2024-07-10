@@ -10,7 +10,7 @@ interface PhoneCoverWithCutoutProps {
 
 const PhoneCoverWithCutout: React.FC<PhoneCoverWithCutoutProps> = ({ phoneTemplate }) => {
   const [image, setImage] = useState<string | null>(null);
-  const [imageDimensions, setImageDimensions] = useState({ width: 200, height: 200 });
+  const [imageDimensions, setImageDimensions] = useState({ width: 400, height: 400 });
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
@@ -21,7 +21,7 @@ const PhoneCoverWithCutout: React.FC<PhoneCoverWithCutoutProps> = ({ phoneTempla
     reader.readAsDataURL(file);
   }, []);
 
-  const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: 'image/*' });
+  const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   return (
     <div className="flex flex-col items-center justify-center bg-gray-100 p-4">
@@ -31,9 +31,9 @@ const PhoneCoverWithCutout: React.FC<PhoneCoverWithCutoutProps> = ({ phoneTempla
       </div>
       <div className="relative bg-white border-2 border-gray-300">
         {/* Camera cutout */}
-        <div className="absolute top-7 left-8 w-24 h-12 bg-gray-50 border border-dotted border-gray-300 z-10 pointer-events-none" />
+        {/* <div className="absolute top-7 left-8 w-24 h-12 bg-gray-50 border border-dotted border-gray-300 z-20 pointer-events-none" /> */}
         {/* Phone template */}
-        <img src={phoneTemplate} alt="phone template" className="w-[348px] h-[701px]" />
+        <img src={phoneTemplate} alt="phone template" className="relative z-10"/>
         {/* Draggable and Resizable Image */}
         {image && (
           <Draggable bounds="parent">
@@ -43,12 +43,12 @@ const PhoneCoverWithCutout: React.FC<PhoneCoverWithCutoutProps> = ({ phoneTempla
               onResize={(e, { size }) => setImageDimensions({ width: size.width, height: size.height })}
               minConstraints={[50, 50]}
               maxConstraints={[300, 300]}
-              className="absolute top-0 left-0"
+              className="absolute z-0"
             >
               <img
                 src={image}
                 alt="Uploaded"
-                className="absolute top-0 left-0 w-full h-full"
+                className="w-full h-full"
                 style={{ pointerEvents: 'none' }}
               />
             </ResizableBox>
